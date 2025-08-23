@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Portanoč</title>
+    <link rel="icon" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark2);
+        }
+
+        :root {
+            --dark1: oklch(26.248% 0.00298 16.797);
+            --dark2: oklch(30.622% 0.00142 15.887);
+            --dark3: oklch(36.403% 0.00551 16.998);
+            --white1: oklch(91.381% 0.00981 16.755);
+            --white2: oklch(77.969% 0.00908 16.816);
+            --white3: oklch(64.194% 0.00715 16.782);
+            --hrc: oklch(52.884% 0.00626 16.827);
+
+        }
+
+        .top {
+            height: 4rem;
+            background: linear-gradient(145deg, var(--dark1), black);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .top_main {
+            font-size: 2rem;
+            color: var(--white1);
+            text-decoration: none;
+            font-family: "Funnel Sans", sans-serif;
+        }
+
+        .top_btn {
+            border: none;
+            background: none;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            max-width: 6rem;
+            max-height: 3.2rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            padding-right: 0.7rem;
+            display: flex;
+            align-items: center;
+            border: var(--dark3) 1px solid;
+            border-radius: 1rem;
+            background-color: black;
+            color: var(--white1);
+
+
+            text-shadow: 1px 1px 1px var(--hrc);
+            font-family: "Funnel Sans", sans-serif;
+            transition: all 0.2s cubic-bezier(0.56, 1.17, 0.71, 0.56);
+        }
+
+        .top_btn:hover {
+            scale: 1.1;
+            border: var(--white2) 3px solid;
+        }
+
+        .top_btn:active {
+            scale: 1.05;
+            border: var(--white2) 1px solid;
+        }
+
+        .top_btn img {
+            width: 3rem;
+            height: 100%;
+            max-width: 3rem;
+            max-height: 3.05rem;
+            border-radius: 2rem;
+        }
+
+        .top_btn_menu {
+            display: flex;
+        }
+
+        .hr {
+            background-color: var(--hrc);
+            height: 5px;
+            border: none;
+        }
+
+        .mtxt {
+            font-size: 2rem;
+            color: var(--white1);
+            text-decoration: none;
+            font-family: "Funnel Sans", sans-serif;
+
+            margin: 1rem;
+        }
+
+        .project_menu {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .project {
+            width: 10rem;
+            height: 15rem;
+            border: var(--dark3) 1px solid;
+            border-radius: 1rem;
+            background-color: black;
+            color: var(--white1);
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            margin: 1rem;
+            font-family: "Funnel Sans", sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .project:hover {
+            scale: 1.05;
+        }
+
+        .project_img {
+            width: 100%;
+            height: 100%;
+            max-width: 10rem;
+            max-height: 10rem;
+            border-radius: 1rem;
+        }
+
+        .project_name {
+            font-size: 1.2rem;
+            color: var(--white1);
+            text-decoration: none;
+            font-family: "Funnel Sans", sans-serif;
+            word-break: break-all;
+        }
+
+        .project_desc {
+            font-size: 0.8rem;
+            color: var(--dark2);
+            text-decoration: none;
+            font-family: "Funnel Sans", sans-serif;
+            word-break: break-all;
+            margin-left: 0.2rem;
+            margin-right: 0.2rem;
+        }
+
+        .project_trash {
+            width: 2rem;
+            height: 2rem;
+            background-color: transparent;
+            color: var(--white1);
+            border: none;
+            cursor: pointer;
+
+        }
+
+        .project_trash_btn {
+            width: 2rem;
+            height: 2rem;
+            background-color: transparent;
+            color: var(--white1);
+            border: none;
+            cursor: pointer;
+
+
+        }
+
+        .all {
+            position: fixed;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .new_popup {
+            width: 20rem;
+            height: 15rem;
+            border: var(--dark3) 1px solid;
+            border-radius: 1rem;
+            background-color: black;
+            color: var(--white1);
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            margin: 1rem;
+            font-family: "Funnel Sans", sans-serif;
+        }
+
+        .new_popup_close {
+            width: 1rem;
+            height: 1rem;
+
+            background-color: transparent;
+            color: var(--white1);
+            border: none;
+            cursor: pointer;
+            margin: 0.5rem;
+            align-self: flex-start;
+            transform: translateY(-10rem);
+        }
+
+        .new_popup_main {}
+
+        .new_popup_input {
+            width: 100%;
+            border: var(--dark3) 1px solid;
+            border-radius: 0.5rem;
+            background-color: black;
+            color: var(--white1);
+
+            font-family: "Funnel Sans", sans-serif;
+            width: 8rem;
+            height: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .new_popup_add {
+            width: 2rem;
+            height: 2rem;
+            border: var(--dark3) 1px solid;
+            border-radius: 0.3rem;
+            background-color: black;
+            color: var(--white1);
+            margin-top: 0.5rem;
+            font-family: "Funnel Sans", sans-serif;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.45, 0.48, 0.34, 0.8);
+        }
+
+        .new_popup_add:hover {
+            scale: 1.1;
+            border: var(--white2) 1px solid;
+        }
+
+        .delete_popup_add {
+            width: 5rem;
+            height: 2rem;
+            border: var(--dark3) 1px solid;
+            border-radius: 0.3rem;
+            background-color: black;
+            color: red;
+            margin-top: 0.5rem;
+            font-family: "Funnel Sans", sans-serif;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.45, 0.48, 0.34, 0.8);
+        }
+
+        .delete_popup_add:hover {
+            scale: 1.1;
+            border: var(--white2) 1px solid;
+        }
+
+        .delete_popup_close {
+            width: 1rem;
+            height: 1rem;
+
+            background-color: transparent;
+            color: var(--white1);
+            border: none;
+            cursor: pointer;
+            margin: 0.5rem;
+            align-self: flex-start;
+            transform: translateY(-6rem);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="all" id="all">
+        <div class="new_popup" id="new_popup">
+
+            <a class="top_main">Nov projekt:</a>
+            <input class="new_popup_input" type="text" placeholder="Ime..." id="name">
+            <input class="new_popup_input" type="text" placeholder="Opis..." id="description">
+            <button class="new_popup_add" id="add" onclick="addProject()">➕</button>
+            <a style="height: max-content;"></a>
+            <button class="new_popup_close" onclick="closePopupNew(true,true)">❌</button>
+        </div>
+        <div class="new_popup" id="delete_popup">
+
+            <a class="top_main">Izbriši projekt:</a>
+            <a id="delete_name"></a>
+            <button class="delete_popup_add" id="add"
+                onclick="actuallyDeleteProject(document.getElementById('delete_name').innerHTML)">Izbriši!</button>
+            <a style="height: max-content;"></a>
+            <button class="delete_popup_close" onclick="closePopupNew(true,true)">❌</button>
+        </div>
+    </div>
+    <div class="top">
+        <a class="top_main">Portanoč</a>
+        <div class="top_btn_menu">
+            <button class="top_btn"><img src="home.png">DOM</button>
+            <button class="top_btn" onclick="openPopupNew(true, false)"><img src="add.png">NOVO</button>
+        </div>
+
+    </div>
+    <hr class="hr">
+    <a class="mtxt">Vaši projekti:</a>
+    <a id="e"></a>
+    <div class="project_menu" id="project_menu">
+        <div class="project">
+            <img src="projects/Project 1/img.png" alt="Project 1" class="project_img">
+            <a class="project_name"> eee</a>
+            <a class="project_desc"> eee descccccccccccccccccccccccc</a>
+            <button class="project_trash_btn" name="Project 1" onclick="deleteProject(this.name)"><img
+                    src="trashcan.png" alt="izbriši" class="project_trash"></button>
+        </div>
+
+    </div>
+    <div style="height: 60rem;">
+
+    </div>
+    <script>
+        const fs = require('fs');
+        const path = require('path');
+        const projects = fs.readFileSync(path.join(__dirname, 'projects/projects.json'));
+        console.log(projects);
+        let parseProj = JSON.parse(projects);
+        const e = document.getElementById('e');
+
+
+
+
+
+
+        let procts = (parseProj.projects).forEach(element => {
+            console.log(element);
+            let g = document.createElement("img");
+            if (fs.existsSync(`projects/${element.name}/img.png`)) {
+                g.src = `projects/${element.name}/img.png`;
+            } else {
+                g.src = `placehold.png`;
+            }
+            //e.innerHTML += element.name + " ./ tuki je break hehe |.";
+            document.getElementById('project_menu').innerHTML += `
+                <div class="project">
+                    <img src="${g.src}" alt="${element.name}" class="project_img">
+                    <a class="project_name">${element.name}</a>
+                    <a class="project_desc">${element.description}</a>
+                    <button class="project_trash_btn" name="${element.name}" onclick="deleteProject(this.name)"><img src="trashcan.png" alt="izbriši" class="project_trash"></button>
+                </div>
+                `
+        });
+
+    </script>
+    <script>
+        function addProject() {
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const projects = fs.readFileSync(path.join(__dirname, 'projects/projects.json'));
+            let parseProj = JSON.parse(projects);
+            parseProj.projects.push({ name: name, description: description });
+            fs.writeFileSync(path.join(__dirname, 'projects/projects.json'), JSON.stringify(parseProj));
+            fs.mkdirSync(path.join(__dirname, `projects/${name}`));
+            window.location.reload();
+        }
+        function closePopupNew(a, b) {
+            document.getElementById('all').style.display = 'none';
+            document.getElementById('all').style.pointerEvents = 'none';
+            if (a) {
+                document.getElementById('new_popup').style.display = 'none';
+            }
+            if (b) {
+                document.getElementById('delete_popup').style.display = 'none';
+            }
+            //document.getElementById('new_popup').style.display = 'none';
+        }
+        closePopupNew(true, true);
+
+        function openPopupNew(a, b) {
+            document.getElementById('all').style.display = 'flex';
+            document.getElementById('all').style.pointerEvents = 'auto';
+            if (a) {
+                document.getElementById('new_popup').style.display = 'flex';
+            }
+            if (b) {
+                document.getElementById('delete_popup').style.display = 'flex';
+            }
+            //document.getElementById('new_popup').style.display = 'flex';
+        }
+        function deleteProject(name) {
+            document.getElementById('delete_name').innerHTML = name;
+            openPopupNew(false, true);
+        }
+        function actuallyDeleteProject(name) {
+            const projects = fs.readFileSync(path.join(__dirname, 'projects/projects.json'));
+            var filepath = path.join(__dirname, `projects/${name}`);
+            console.log(filepath);
+            var removefilepath = path.join(__dirname, `projects_removed/${name}`);
+            console.log(removefilepath);
+
+            fs.rename(filepath, removefilepath, (err) => {
+                if (err) {
+                    alert(filepath + "eeeee"+ removefilepath);
+                    alert("An error ocurred updating the file" + err.message);
+                    console.log(err);
+                    return;
+                }
+                console.log('Rename complete!');
+             }); 
+            let parseProj = JSON.parse(projects);
+            parseProj.projects = parseProj.projects.filter(project => project.name !== name);
+            fs.writeFileSync(path.join(__dirname, 'projects/projects.json'), JSON.stringify(parseProj));
+            window.location.reload();
+        }
+    </script>
+</body>
+
+</html>
