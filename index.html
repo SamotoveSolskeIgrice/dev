@@ -164,7 +164,8 @@
             color: var(--white1);
             border: none;
             cursor: pointer;
-
+            display:fixed;
+            transform: translate(0.6rem, calc(-0.6rem + 14rem));
         }
 
         .project_trash_btn {
@@ -174,10 +175,20 @@
             color: var(--white1);
             border: none;
             cursor: pointer;
-
-
+            align-self: end;
+            display:fixed;
+            z-index: 50;
         }
-
+        .project_info {
+            transform: translateY(-1rem);
+        }
+        .project_main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-2rem);
+        }
         .all {
             position: fixed;
             display: flex;
@@ -187,6 +198,7 @@
             justify-content: center;
             width: 100vw;
             height: 100vh;
+            z-index: 100;
         }
 
         .new_popup {
@@ -201,6 +213,7 @@
             flex-direction: column;
             margin: 1rem;
             font-family: "Funnel Sans", sans-serif;
+            z-index: 100;
         }
 
         .new_popup_close {
@@ -216,7 +229,7 @@
             transform: translateY(-10rem);
         }
 
-        .new_popup_main {}
+        /*.new_popup_main {}*/ 
 
         .new_popup_input {
             width: 100%;
@@ -289,7 +302,7 @@
             <a class="top_main">Nov projekt:</a>
             <input class="new_popup_input" type="text" placeholder="Ime..." id="name">
             <input class="new_popup_input" type="text" placeholder="Opis..." id="description">
-            <button class="new_popup_add" id="add" onclick="addProject()">➕</button>
+            <button class="new_popup_add" id="add" onclick="addProject();closePopupNew(true, true);">➕</button>
             <a style="height: max-content;"></a>
             <button class="new_popup_close" onclick="closePopupNew(true,true)">❌</button>
         </div>
@@ -298,7 +311,7 @@
             <a class="top_main">Izbriši projekt:</a>
             <a id="delete_name"></a>
             <button class="delete_popup_add" id="add"
-                onclick="actuallyDeleteProject(document.getElementById('delete_name').innerHTML)">Izbriši!</button>
+                onclick="actuallyDeleteProject(document.getElementById('delete_name').innerHTML);closePopupNew(true, true);">Izbriši!</button>
             <a style="height: max-content;"></a>
             <button class="delete_popup_close" onclick="closePopupNew(true,true)">❌</button>
         </div>
@@ -307,7 +320,7 @@
         <a class="top_main">Portanoč</a>
         <div class="top_btn_menu">
             <button class="top_btn"><img src="home.png">DOM</button>
-            <button class="top_btn" onclick="openPopupNew(true, false)"><img src="add.png">NOVO</button>
+            <button class="top_btn" onclick="openPopupNew(true, false);"><img src="add.png">NOVO</button>
         </div>
 
     </div>
@@ -315,14 +328,16 @@
     <a class="mtxt">Vaši projekti:</a>
     <a id="e"></a>
     <div class="project_menu" id="project_menu">
+        <!--
         <div class="project">
-            <img src="projects/Project 1/img.png" alt="Project 1" class="project_img">
-            <a class="project_name"> eee</a>
-            <a class="project_desc"> eee descccccccccccccccccccccccc</a>
-            <button class="project_trash_btn" name="Project 1" onclick="deleteProject(this.name)"><img
-                    src="trashcan.png" alt="izbriši" class="project_trash"></button>
+            <button class="project_trash_btn" name="Project 1" onclick="deleteProject(this.name)"><img src="trashcan.png" alt="izbriši" class="project_trash"></button>
+            <div class="project_main">
+                <img src="projects/Project 1/img.png" alt="Project 1" class="project_img">
+                <a class="project_name"> eee</a>
+                <a class="project_desc"> eee descccccccccccccccccccccccc</a>
+            </div>
         </div>
-
+        -->
     </div>
     <div style="height: 60rem;">
 
@@ -351,10 +366,12 @@
             //e.innerHTML += element.name + " ./ tuki je break hehe |.";
             document.getElementById('project_menu').innerHTML += `
                 <div class="project">
-                    <img src="${g.src}" alt="${element.name}" class="project_img">
-                    <a class="project_name">${element.name}</a>
-                    <a class="project_desc">${element.description}</a>
-                    <button class="project_trash_btn" name="${element.name}" onclick="deleteProject(this.name)"><img src="trashcan.png" alt="izbriši" class="project_trash"></button>
+                    <button class="project_trash_btn" name="${element.name}" onclick="deleteProject(this.name)"><img src="trashcan2.png" alt="izbriši" class="project_trash"></button>
+                    <div class="project_main">
+                        <img src="${g.src}" alt="${element.name}" class="project_img">
+                        <a class="project_name">${element.name}</a>
+                        <a class="project_desc">${element.description}</a>
+                    </div>
                 </div>
                 `
         });
